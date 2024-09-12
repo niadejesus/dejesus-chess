@@ -3,7 +3,7 @@ const playerDisplay = document.querySelector("#player")
 const infoDisplay = document.querySelector("#info-display")
 const width = 8
 let playerGo = 'black'
-playerDisplay.textContent = 'blacks'
+playerDisplay.textContent = 'blacks' //These first few lines are used in order to define the constants that are used when starting off the game.
 
 const startPieces = [
     rook, knight, bishop, queen, king, bishop, knight, rook,
@@ -13,7 +13,7 @@ const startPieces = [
     '', '', '', '','','','','',
     '', '', '', '','','','','',
     pawn, pawn, pawn, pawn, pawn, pawn, pawn, pawn,
-    rook, knight, bishop, queen, king, bishop, knight, rook
+    rook, knight, bishop, queen, king, bishop, knight, rook // This is used in order to set which pieces belong in the respective spots.
 ]
 
 function createBoard() {
@@ -40,7 +40,7 @@ function createBoard() {
         gameBoard.append(square)
     })
     }
-createBoard();
+createBoard(); //The function createBoard is used in order to draw squares onto the board that is there. 
 
 const allSquares = document.querySelectorAll(".square")
 
@@ -48,7 +48,7 @@ allSquares.forEach(square => {
     square.addEventListener('dragstart',dragStart)
     square.addEventListener('dragover',dragOver)
     square.addEventListener('drop', dragDrop)
-})
+}) //This makes it so that each square will check for the appropriate dragstart, dragover, and drop movements that can be done based on the rules that are set on the pieces.
 
 let startPositionId 
 let draggedElement 
@@ -90,7 +90,7 @@ function dragDrop(e){
          changePlayer()
          return
         }
-    }
+    } // This function will check if the moves that the player tries to do to drag pieces is valid. If not, it returns the piece to the spot it's being dragged from.
 }
 
  function checkIfValid(target){
@@ -122,7 +122,7 @@ function dragDrop(e){
                 startId - width * 2 + 1 === targetId ||
                 startId - width * 2 - 1 === targetId ||
                 startId - width - 2 === targetId ||
-                startId - width + 2 === targetId 
+                startId - width + 2 === targetId  //These rules in particular are only used for the knight piece which is restricted compared to other pieces. 
              ) {
                 return true
              }
@@ -537,7 +537,7 @@ function changePlayer(){
         playerGo = "black"
         playerDisplay.textContent = 'black'
     }
-}
+} //This function changes players after each turn when it sees that playerGo is equal to black or white. 
 
 function reverseIds() {
     const allSquares = document.querySelectorAll(".square");
@@ -562,4 +562,4 @@ function checkForWin() {
         infoDisplay.innerHTML = "White player wins!"
         const allSquares = document.querySelectorAll('.square')
         allSquares.forEach(square => square.firstElementChild?.setAttribute('draggable', false))
-}}
+}} //This function will checkForWin after each turn by checking the king pieces and if they're in the opposite teams' array for pieces.
